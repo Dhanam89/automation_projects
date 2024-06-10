@@ -1,0 +1,18 @@
+# Aim of this project is to fetch the newspaper headings from 'The Hindu' online newspaper
+
+from bs4 import BeautifulSoup
+import requests
+import html
+import pandas as pd
+
+website = "https://www.thehindu.com/"
+result = requests.get(website)
+content = result.text
+
+soup = BeautifulSoup(content, 'lxml')
+#print(soup.prettify())
+headlines = soup.find_all("h3")
+headline_text = [headline.get_text(strip = "True") for headline in headlines]
+headline_text_df = pd.DataFrame(headline_text, columns = ["Headlines"])
+headline_text_df.to_csv("newspaper_headlines.csv", index = "False")
+print("The headlines from the newspaper website are added to a csv file")
