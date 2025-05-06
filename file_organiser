@@ -1,0 +1,42 @@
+import os
+import shutil
+
+# ✅ Set the correct folder path
+DIRECTORY = "Please provide folder path which needs files organised "
+
+# ✅ Folder mapping based on file extensions
+FOLDER_MAP = {
+    "Images": [".jpg", ".jpeg", ".png", ".gif"],
+    "Documents": [".pdf", ".docx", ".txt", ".xlsx"],
+    "Videos": [".mp4", ".mkv"],
+    "Audio": [".mp3", ".wav"],
+    "Archives": [".zip", ".tar", ".gz"],
+}
+
+# ✅ Create folders and move files
+def file_organiser():
+    for filename in os.listdir(DIRECTORY):
+        file_path = os.path.join(DIRECTORY, filename)
+    
+        # Only proceed if it's a file
+        if os.path.isfile(file_path):
+            _, ext = os.path.splitext(filename)
+            moved = False
+            for folder, extensions in FILE_TYPES.items():
+                if ext.lower() in extensions:
+                    dest_folder = os.path.join(DIRECTORY, folder)
+                    os.makedirs(dest_folder, exist_ok=True)
+                    shutil.move(file_path, os.path.join(dest_folder, filename))
+                    print(f"Moved '{filename}' to '{folder}'")
+                    moved = True
+                    break
+            if not moved:
+                #print(f"No matching folder for '{filename}' (extension: {ext})")
+                other_folder = os.path.join(DIRECTORY, "Miscelleneous")
+                os.makedirs(other_folder, exist_ok = True)
+                shutil.move(file_path, os.path.join(DIRECTORY, other_folder))
+                print(f"Moved '{filename}' to 'Miscelleneous'")
+            print("Succesfully organised the files in the assigned folders")
+
+if __name__ == "__main__":
+    file_organiser()
