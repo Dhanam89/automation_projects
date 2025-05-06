@@ -1,0 +1,28 @@
+import os
+
+# Declare the constants 
+DIRECTORY = "Please provide the folder name here"
+PREFIX = "Test"
+SUFFIX = "2025"
+DRY_RUN = True
+
+# Define the function
+def bulk_rename_files(folder_name):
+    for filename in os.listdir(DIRECTORY):
+        old_path = os.path.join(DIRECTORY, filename)
+        
+        if os.path.isfile(old_path):
+            name , ext = os.path.splitext(filename)
+            new_name = f"{PREFIX}{name}{SUFFIX}{ext}"
+            new_path = os.path.join(DIRECTORY, new_name)
+            
+        if DRY_RUN:
+            print(f"DRY RUN : Will rename file name from  {filename} -> {new_name}")
+        else:
+            os.rename(old_path, new_path)
+            print(f"Renamed file name from  {filename} -> {new_name}")
+
+# Call the function
+if __name__ == "__main__":
+    bulk_rename_files(DIRECTORY)
+    
