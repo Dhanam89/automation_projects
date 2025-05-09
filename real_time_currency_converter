@@ -1,0 +1,27 @@
+import requests
+
+api_key = "eaf191f4f2d4180bc93dc032"
+
+def convert_currency(base_currency, target_currency, amount):
+    url = f"https://v6.exchangerate-api.com/v6/{api_key}/latest/{base_currency}"
+
+    response = requests.get(url)
+    if response.status_code != 200:
+        print("❌ Failed to fetch exchange rates.")
+        return
+
+    data = response.json()
+    try:
+        rate = data["conversion_rates"][target_currency]
+        converted_amount = amount * rate
+        print(f"{amount} {base_currency} = {converted_amount:.2f} {target_currency}")
+    except KeyError:
+        print("❌ Invalid currency code entered.")
+
+# Example usage
+if __name__ == "__main__":
+    base = input("Enter base currency (e.g., USD): ").upper()
+    target = input("Enter target currency (e.g., EUR): ").upper()
+    amount = float(input("Enter amount: "))
+
+    convert_currency(base, target, amount)
