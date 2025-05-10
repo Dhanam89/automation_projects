@@ -1,0 +1,40 @@
+## Create backup of files in local machine every 60 minutes
+
+# import libraries
+import schedule
+import shutil
+import os
+import time
+from datetime import datetime
+
+# define source and backup folders
+source_dir = "Please provide source folder path here"
+backup_dir = "Please provide backup folder path here"
+
+# Define backup function
+
+def backup():
+    timestamp = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
+    destination = os.path.join(backup_dir, f"backup{timestamp}")
+    os.makedirs(destination, exist_ok=True)
+
+    for filename in os.listdir(source_dir):
+        src_file = os.path.join(source_dir, filename)
+        targ_file = os.path.join(backup_dir, filename)
+        if os.path.isfile(src_file):
+            shutil.copy2(src_file, targ_file)
+    print(f"Successfully, completed backup process at {timestamp}")
+
+# create schedule to call the backup function every day at 9 am
+schedule.every().day.at("09:00").do(backup)
+
+# code to terminate the schedule through keyboard intervention
+print("Backup scheduler running... Press Ctrl+C to stop.")
+try:
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
+except KeyboardInterrupt:
+    print("User requested to stop the backup process")
+
+
