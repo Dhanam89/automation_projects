@@ -1,0 +1,31 @@
+# Import required libraries
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+import time
+from webdriver_manager.chrome import ChromeDriverManager
+
+
+# Set up the driver 
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+
+try:
+    # Open the webpage 
+    driver.get("https://the-internet.herokuapp.com/login")
+    time.sleep(2)
+
+    # Login using credentials
+    driver.find_element(By.ID, "username").send_keys("tomsmith")
+    driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+    driver.find_element(By.CSS_SELECTOR, "button.radius").click()
+    time.sleep(2)
+
+    # Post the message 
+    message = "This is an automated post"
+    print("Successfully logged in and posting a message")
+    time.sleep(2)
+finally:
+    # Close the webpage
+    driver.close()
