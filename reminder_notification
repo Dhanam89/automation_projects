@@ -1,0 +1,20 @@
+# import libraries
+from datetime import datetime
+import time
+
+# define reminder function
+def reminder(task ="Drink water", interval_minutes = 60):
+    print(f" Reminder for task {task}. It will repeat every {interval_minutes}  minutes ")
+    print("To exit. Please click on Ctrl + C")
+    try:
+        while True:
+         
+            current_time =  datetime.now().strftime("%H:%M:%S")
+            print(f"{current_time} Reminder: {task}")
+            time.sleep(interval_minutes * 60)
+    except KeyboardInterrupt:
+            print("User request to stop the reminder")
+
+
+# call the function
+reminder()
