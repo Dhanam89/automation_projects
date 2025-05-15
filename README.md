@@ -1,4 +1,5 @@
 Simple automation projects using Python
+
   📰 Web Scraping – Grab headlines from news websites and export to CSV
 
   📂 File Organiser – Sort files into folders by type
