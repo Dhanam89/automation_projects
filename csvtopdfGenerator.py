@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 from fpdf import FPDF
 
 # Define path for output files
-path = "/Users/dhanalakshmirajan/Downloads/Sales_Dataset/100 Sales Records.csv"
-bar_chart_path = "/Users/dhanalakshmirajan/Downloads/Sales_Dataset/total_profit_by_region.png"
-pie_chart_item_path = "/Users/dhanalakshmirajan/Downloads/Sales_Dataset/total_profit_by_item_type.png"
-pie_chart_channel_path = "/Users/dhanalakshmirajan/Downloads/Sales_Dataset/unit_sold_by_sales_channel.png"
-output_pdf_path = "/Users/dhanalakshmirajan/Downloads/Sales_Dataset/Sales_Report_With_Charts.pdf"
+path = "100 Sales Records.csv"
+bar_chart_path = "total_profit_by_region.png"
+pie_chart_item_path = "total_profit_by_item_type.png"
+pie_chart_channel_path = "unit_sold_by_sales_channel.png"
+output_pdf_path = "Sales_Report_With_Charts.pdf"
 
 def extract_data(path):
     data = pd.read_csv(path)
